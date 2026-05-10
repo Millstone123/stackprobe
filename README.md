@@ -2,7 +2,6 @@
 
 A terminal-based stack trace analyser for debugging crash reports locally.
 
-dont clone
 
 ## Setup
 
