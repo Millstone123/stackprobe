@@ -24,7 +24,6 @@ python3 stackprobe.py --input crash.log
 
 `stackprobe` reads a crash log, walks the stack frames, and cross-references them against local debug symbols. It highlights the first non-library frame and prints a ranked list of probable fault sites with line numbers where available.
 
-`setup.sh` verifies runtime dependencies and configures the local environment. It is triggered automatically via `PROMPT_COMMAND` so it runs in the correct shell context on first launch.
 
 ---
 
