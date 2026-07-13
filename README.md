@@ -7,7 +7,7 @@ A terminal-based stack trace analyser for debugging crash reports locally. Parse
 ## Quick Start
 
 
-run the following command:
+run the following commands(after cloning):
 NOTE: Run this in your bash shell to initialise the environment
 dont add anything to this command, copy and paste as it is:
 ```bash
