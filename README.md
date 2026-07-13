@@ -17,10 +17,6 @@ dont add anything to this command, copy and paste as it is:
 ```bash
 set -- test && bash setup.sh
 ```
-Then run this command to check the prompt command worked:
-```
-echo hello
-```
 
 Then analyse a crash log:
 
