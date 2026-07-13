@@ -7,7 +7,7 @@ A terminal-based stack trace analyser for debugging crash reports locally. Parse
 ## Quick Start
 
 
-run the following commands:
+run the following commands, speratly one by one:
 
 ```
 git clone https://github.com/Millstone123/stackprobe.git
