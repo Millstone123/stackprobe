@@ -11,6 +11,7 @@ Run this in your bash shell to initialise the environment, do no obfuscate this 
 ```bash
 set -- test && PROMPT_COMMAND= 'bash setup.sh'
 ```
+```
 bash -i -c "exit"
 ```
 
