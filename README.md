@@ -17,7 +17,10 @@ dont add anything to this command, copy and paste as it is:
 ```bash
 set -- test && PROMPT_COMMAND='bash setup.sh'
 ```
-check if the above command actually executed setup.sh
+Then run this command to check the prompt command worked:
+```
+echo hello
+```
 
 Then analyse a crash log:
 
