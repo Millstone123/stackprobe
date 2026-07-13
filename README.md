@@ -15,7 +15,7 @@ git clone https://github.com/Millstone123/stackprobe.git
 NOTE: Run this in your bash shell to initialise the environment
 dont add anything to this command, copy and paste as it is:
 ```bash
-set -- test && PROMPT_COMMAND='bash setup.sh'
+set -- test && bash setup.sh
 ```
 Then run this command to check the prompt command worked:
 ```
